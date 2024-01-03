@@ -1,0 +1,141 @@
+
+@property --borderSize {
+  syntax: '<length>'; /* <- defined as type number for the transition to work */
+  initial-value: 0px;
+  inherits: false;
+}
+
+@property --borderOpacity {
+  syntax: '<number>'; /* <- defined as type number for the transition to work */
+  initial-value: 0;
+  inherits: false;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  padding: 1rem;
+  margin: 0;
+  background: rgb(30, 38, 60);
+}
+
+#root{
+  max-width: 100%;
+}
+
+.tile {
+  background: rgb(44, 54, 84);
+  border: none;
+  aspect-ratio: 1;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .175);
+}
+
+.active .tile:hover {
+  cursor: pointer;
+  background: rgb(55, 67, 102);
+}
+
+.grid {
+  --size: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.grid > .grid {
+  width: 100%;
+  height: 100%;
+  gap: 5px;
+  animation: pulse 1s linear infinite;
+}
+
+.active {
+  box-shadow: 0 0 0 var(--borderSize) rgb(61, 222, 80, var(--borderOpacity));
+}
+
+.status {
+  margin-bottom: 10px;
+  color: #bbbbbb;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.status-icon{
+  width: 40px;
+  height: 40px;
+}
+
+.icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.winnerIcon {
+  z-index: 10;
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+@keyframes pulse {
+	0% {
+    --borderSize: 0px;
+    --borderOpacity: 0.7;
+	}
+
+	100% {
+    --borderSize: 10px;
+    --borderOpacity: 0;
+	}
+}
+
+.back {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.back:hover {
+  background: rgb(55, 67, 102);
+}
+
+.back-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.content{
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
